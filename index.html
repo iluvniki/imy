@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital@0;1&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Love</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #d3ccbc;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .heart-container {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .click-me {
+            font-size: 50px;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .heart {
+            font-size: 50px;
+            color: #e91e63;
+            cursor: pointer;
+            animation: heartbeat 1.5s infinite;
+            position: relative; top: 50%;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .bouncing-text {
+            position: absolute;
+            color: #e91e63;
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0;
+            animation: bounce 8s infinite linear;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            25% {
+                transform: translate(200%, -100%);
+            }
+            50% {
+                transform: translate(100%, 200%);
+            }
+            75% {
+                transform: translate(-100%, 100%);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .click-me {
+                font-size: 18px;
+            }
+
+            .heart {
+                font-size: 40px;
+            }
+
+            .bouncing-text {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .click-me {
+                font-size: 16px;
+                font-family: "Linden Hill", serif;
+            }
+
+            .heart {
+                display: flex;
+                ;
+                font-size: 90px;
+                position: relative; top: 90%;
+            }
+
+            .bouncing-text {
+                font-size: 18px;
+                font-family: "Linden Hill", serif;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container">
+        <div class="click-me">Click Me</div>
+        <div class="heart" onclick="redirectToIndex()">❤️</div>
+    </div>
+
+    <script>
+        function redirectToIndex() {
+            window.location.href = "goodnight.html"; // Redirect to index.html
+        }
+
+        // Create bouncing "I love you" texts
+        const texts = ["I love you niki", "You're amazing", "You're perfect", "My heart is yours", "You mean everything"];
+        const colors = ["#000000"];
+
+        function createBouncingText() {
+            const textElement = document.createElement('div');
+            textElement.classList.add('bouncing-text');
+            textElement.textContent = texts[Math.floor(Math.random() * texts.length)];
+            textElement.style.color = colors[Math.floor(Math.random() * colors.length)];
+            textElement.style.left = `${Math.random() * 90}vw`;
+            textElement.style.top = `${Math.random() * 90}vh`;
+            document.body.appendChild(textElement);
+
+            // Remove the text element after animation ends
+            setTimeout(() => {
+                textElement.remove();
+            }, 8000);
+        }
+
+        // Generate bouncing texts every 1 second
+        setInterval(createBouncingText, 500);
+    </script>
+</body>
+</html>
